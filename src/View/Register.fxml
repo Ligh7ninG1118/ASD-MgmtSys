@@ -27,7 +27,7 @@
                 <TextField id="usernameTextField" fx:id="usernameTextField" layoutX="120.0" layoutY="20.0" />
                 <PasswordField id="passwordTextField" fx:id="passwordTextField" layoutX="120.0" layoutY="70.0">
                <tooltip>
-                  <Tooltip text="密码应当为大于等于6位，小于等于18位，且仅由英文字母，数字组成" />
+                  <Tooltip text="密码应当为大于等于6位，小于等于18位，且仅由英文字母，数字组成"  />
                </tooltip></PasswordField>
                 <PasswordField id="repasswordTextField" fx:id="repasswordTextField" layoutX="120.0" layoutY="120.0" />
                 <TextField id="nameTextField" fx:id="nameTextField" layoutX="120.0" layoutY="170.0" />
