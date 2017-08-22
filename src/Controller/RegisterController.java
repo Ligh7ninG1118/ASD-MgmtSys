@@ -64,7 +64,6 @@ public class RegisterController
         String commit = commitCBox.getValue().toString();
 
 
-
     }
 
     @FXML
@@ -94,7 +93,9 @@ public class RegisterController
 
     public boolean ifInvaildInput()
     {
-
+/**
+ *  TextFields 判断
+ */
         if (usernameTextField.getText().equals(""))
         {
             alertmessageLabel.setText("用户名不能为空");
@@ -120,30 +121,42 @@ public class RegisterController
             alertmessageLabel.setText("联系方式不能为空");
             return true;
         }
+/**
+ *  ChoiceBoxs 判断
+ */
 
-        
-        if(sexCBox.getValue()==null)
+        if (sexCBox.getValue() == null)
         {
             alertmessageLabel.setText("请选择性别");
             return true;
         }
-        if(commitCBox.getValue()==null)
+        if (commitCBox.getValue() == null)
         {
             alertmessageLabel.setText("请选择专委会");
             return true;
         }
-        if(subcommitCBox.getValue()==null)
+        if (subcommitCBox.getValue() == null)
         {
-            alertmessageLabel.setText("请选择专委会");
+            alertmessageLabel.setText("请选择行业分会");
             return true;
         }
-
+/**
+ *  其他 判断
+ */
 
         if (!passwordTextField.getText().equals(repasswordTextField.getText()))
         {
             alertmessageLabel.setText("两次输入密码不一致");
             return true;
         }
+        System.out.println(birthdayDatePicker.getValue().toString());
+        System.out.println(LocalDate.now().toString());
+        if(birthdayDatePicker.getValue().toString().compareTo(LocalDate.now().toString()) > 0)
+        {
+            alertmessageLabel.setText("生日选择错误");
+            return true;
+        }
+
 
         return false;
 
