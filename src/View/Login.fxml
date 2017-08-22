@@ -4,27 +4,40 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="459.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+<AnchorPane prefHeight="443.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
-      <AnchorPane layoutX="18.0" layoutY="144.0" prefHeight="170.0" prefWidth="365.0">
+      <AnchorPane layoutX="25.0" layoutY="145.0" prefHeight="170.0" prefWidth="350.0">
          <children>
-            <Label id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="30.0" prefHeight="30.0" prefWidth="75.0" text="Username" textAlignment="CENTER" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="268.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="30.0" prefWidth="90.0" text="Password" textAlignment="CENTER" />
+            <Label id="usernameLabel" layoutX="20.0" layoutY="30.0" prefHeight="30.0" prefWidth="75.0" text="用户名" textAlignment="CENTER" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="252.0" />
+            <Label layoutX="23.0" layoutY="70.0" prefHeight="30.0" prefWidth="72.0" text="密码" textAlignment="CENTER" />
             <TextField id="userField" layoutX="115.0" layoutY="30.0" />
-            <TextField id="pwField" layoutX="115.0" layoutY="73.0" />
-            <RadioButton id="rbtn_isWriter" layoutX="191.0" layoutY="129.0" mnemonicParsing="false" text="Writer" />
-            <RadioButton id="rbtn_isAdmin" layoutX="78.0" layoutY="129.0" mnemonicParsing="false" text="Admin" />
+            <TextField id="pwField" layoutX="115.0" layoutY="70.0" />
             <Label id="messagelbl" layoutX="60.0" layoutY="156.0" prefHeight="20.0" prefWidth="211.0" />
+            <HBox alignment="CENTER" layoutX="20.0" layoutY="120.0" prefHeight="40.0" prefWidth="300.0" spacing="40.0">
+               <children>
+                  <RadioButton id="rbtn_isWriter" mnemonicParsing="false" text="写者">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="rbtn" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton id="rbtn_isAdmin" mnemonicParsing="false" text="管理员" toggleGroup="$rbtn" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="28.0" layoutY="328.0" prefHeight="94.0" prefWidth="343.0">
+      <AnchorPane layoutX="25.0" layoutY="320.0" prefHeight="100.0" prefWidth="350.0">
          <children>
-            <Button id="btn_SignIn" fx:id="btn_login" onAction="#loginAction" layoutX="54.0" layoutY="27.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="SIGN IN" />
-            <Button id="btn_SignUp" fx:id="btn_reg" layoutX="193.0" layoutY="27.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="SIGN UP" />
+            <HBox alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="80.0" prefWidth="250.0" spacing="30.0">
+               <children>
+                  <Button id="btn_SignIn" fx:id="btn_login" mnemonicParsing="false" onAction="#loginAction" prefHeight="40.0" prefWidth="90.0" text="登录" />
+                  <Button id="btn_SignUp" fx:id="btn_reg" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="注册" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="28.0" layoutY="22.0" prefHeight="122.0" prefWidth="343.0" />
+      <AnchorPane layoutX="25.0" layoutY="20.0" prefHeight="120.0" prefWidth="340.0" />
    </children>
 </AnchorPane>

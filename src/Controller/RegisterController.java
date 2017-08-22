@@ -11,6 +11,8 @@ import java.util.Date;
 
 public class RegisterController
 {
+
+
     @FXML
     private Label alertmessageLabel;
     @FXML
@@ -43,6 +45,7 @@ public class RegisterController
     @FXML
     private ChoiceBox commitCBox;
 
+    boolean isFilled[];
 
     @FXML
     public void registerAction(ActionEvent e)
@@ -50,20 +53,41 @@ public class RegisterController
         if (ifInvaildInput())
             return;
 
+        isFilled = new boolean[2];
+        if (addressTextField.getText().equals(""))
+            isFilled[0] = false;
+        else
+            isFilled[0] = true;
+        if (recommTextField.getText().equals(""))
+            isFilled[1] = false;
+        else
+            isFilled[1] = true;
         alertmessageLabel.setText("");
-        String username = usernameTextField.getText().trim();
-        String password = passwordTextField.getText();
-        String repassword = repasswordTextField.getText();
+        String ipusername = usernameTextField.getText().trim();
+        String ippassword = passwordTextField.getText();
+        String iprepassword = repasswordTextField.getText();
 
-        String name = nameTextField.getText().trim();
-        String birthday = birthdayDatePicker.getValue().toString();
-        String sex = sexCBox.getValue().toString();
-        String comm = commTextField.getText().trim();
-        String address = addressTextField.getText().trim().trim();
-        String subcommit = subcommitCBox.getValue().toString();
-        String commit = commitCBox.getValue().toString();
+        String ipname = nameTextField.getText().trim();
+        String ipsex = sexCBox.getValue().toString();
+        String ipcomm = commTextField.getText().trim();
+        String ipsubcommit = subcommitCBox.getValue().toString();
+        String ipcommit = commitCBox.getValue().toString();
+
+        if (isFilled[0])
+        {
+            String ipaddress = addressTextField.getText().trim().trim();
+        }
+
+        if (isFilled[1])
+        {
+            String ipbirthday = birthdayDatePicker.getValue().toString();
+        }
 
 
+        /**
+         * WIP AREA 连接数据库 获取信息 查找是否有相同的用户名
+         * WIP AREA 数据录入数据库
+         */
     }
 
     @FXML
@@ -101,6 +125,11 @@ public class RegisterController
             alertmessageLabel.setText("用户名不能为空");
             return true;
         }
+        if (usernameTextField.getText().length() > 24)
+        {
+            alertmessageLabel.setText("用户名过长");
+            return true;
+        }
         if (passwordTextField.getText().equals(""))
         {
             alertmessageLabel.setText("密码不能为空");
@@ -116,9 +145,19 @@ public class RegisterController
             alertmessageLabel.setText("姓名不能为空");
             return true;
         }
+        if (nameTextField.getText().length() > 24)
+        {
+            alertmessageLabel.setText("姓名过长");
+            return true;
+        }
         if (commTextField.getText().equals(""))
         {
             alertmessageLabel.setText("联系方式不能为空");
+            return true;
+        }
+        if (commTextField.getText().length() > 24)
+        {
+            alertmessageLabel.setText("联系方式过长");
             return true;
         }
 /**
@@ -149,15 +188,22 @@ public class RegisterController
             alertmessageLabel.setText("两次输入密码不一致");
             return true;
         }
-        System.out.println(birthdayDatePicker.getValue().toString());
-        System.out.println(LocalDate.now().toString());
-        if(birthdayDatePicker.getValue().toString().compareTo(LocalDate.now().toString()) > 0)
+        if (birthdayDatePicker.getValue().toString().compareTo(LocalDate.now().toString()) > 0 ||
+                LocalDate.now().getYear() - birthdayDatePicker.getValue().getYear() >= 100)
         {
             alertmessageLabel.setText("生日选择错误");
             return true;
         }
-
-
+        if (passwordTextField.getText().length() < 6 || passwordTextField.getText().length() > 18 || !passwordTextField.getText().matches("[0-9a-zA-Z]+"))
+        {
+            alertmessageLabel.setText("密码不符规定");
+            return true;
+        }
+        if (!commTextField.getText().matches("[0-9]+"))
+        {
+            alertmessageLabel.setText("联系方式不符规定");
+            return true;
+        }
         return false;
 
     }
