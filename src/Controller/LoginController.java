@@ -1,20 +1,22 @@
 package Controller;
 
+import MgmtSys.Main;
+import Util.Logger;
 import Util.UserVerif;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import model.User;
 
-import javax.swing.*;
-import java.util.logging.Logger;
+import static MgmtSys.Main.WriterViewID;
+import static MgmtSys.Main.WriterViewRes;
 
 
-public class LoginController
+public class LoginController implements ControlledStage
 {
     UserVerif uvf = new UserVerif();
-
-
+    StageController myController = new StageController();
+    Logger myLogger = new Logger();
     @FXML
     private Button btn_login;
     @FXML
@@ -31,23 +33,32 @@ public class LoginController
     {
         String loginID = userField.getText().trim();
         String password = pwField.getText().trim();
-        if(loginID.equals("")||password.equals(""))
+        if (loginID.equals("") || password.equals(""))
         {
             alertmessage.setText("Empty");
             return;
         }
-        if(!uvf.AuthInfoVerif(loginID,password))
+        if (!uvf.AuthInfoVerif(loginID, password))
         {
             alertmessage.setText("Error");
             return;
+        } else
+        {
+            myLogger.addUserInfo(uvf.getUserId(loginID));
+            myController.loadStage(WriterViewID, WriterViewRes);
+            myController.setStage(WriterViewID, Main.loginViewID);
+
         }
-        else
-            alertmessage.setText("Success");
     }
 
     public void regAction(ActionEvent e)
     {
+        myController.setStage(Main.RegisterViewID);
+    }
 
+    public void setStageController(StageController stageController)
+    {
+        this.myController = stageController;
     }
 
 }

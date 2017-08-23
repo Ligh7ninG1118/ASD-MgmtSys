@@ -13,6 +13,18 @@ public class Comment implements Serializable
     private Date commentdate;
     private boolean choice;
 
+    public int getArticleid()
+    {
+        return articleid;
+    }
+
+    public void setArticleid(int articleid)
+    {
+        this.articleid = articleid;
+    }
+
+    private int articleid;
+
     public Article getArticle()
     {
         return article;

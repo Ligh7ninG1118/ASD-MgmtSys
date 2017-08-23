@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.UserDAO;
+import MgmtSys.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,9 +13,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class RegisterController
+public class RegisterController implements ControlledStage
 {
-
+    StageController myController;
 
     @FXML
     private Label alertmessageLabel;
@@ -112,15 +113,23 @@ public class RegisterController
 
 
             boolean bool = udao.addUser(user);
-            if (bool)
-                alertmessageLabel.setText("注册信息提交");
+            if (true)
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("注册成功");
+                alert.setHeaderText(null);
+                alert.setContentText("注册申请已提交，待管理员审核通过过后方可使用该账号登录");
+                alert.showAndWait();
+                myController.setStage(Main.loginViewID,Main.RegisterViewID);
+                return;
+            }
         }
     }
 
     @FXML
     public void cancelAction(ActionEvent e)
     {
-
+        myController.setStage(Main.loginViewID,Main.RegisterViewID);
     }
 
     @FXML
@@ -232,6 +241,13 @@ public class RegisterController
             return true;
         }
         return false;
+
+    }
+
+    public void setStageController(StageController stageController) {
+        this.myController = stageController;
+    }
+    public void initialize() {
 
     }
 }

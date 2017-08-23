@@ -2,6 +2,7 @@ package DAO;
 
 import model.User;
 import DB.*;
+import sun.security.util.Password;
 
 
 import java.sql.Connection;
@@ -25,12 +26,12 @@ public final class UserDAO
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, user.getLoginID());
             pstmt.setString(2, user.getPassword());
-            pstmt.setString(3,user.getName());
-            pstmt.setInt(4,user.getType());
-            pstmt.setString(5,user.getSex());
-            pstmt.setString(6,user.getComm());
-            pstmt.setString(7,user.getAddress());
-            pstmt.setString(8,user.getRecommender());
+            pstmt.setString(3, user.getName());
+            pstmt.setInt(4, user.getType());
+            pstmt.setString(5, user.getSex());
+            pstmt.setString(6, user.getComm());
+            pstmt.setString(7, user.getAddress());
+            pstmt.setString(8, user.getRecommender());
             int rs = pstmt.executeUpdate();
             if (rs > 0)
             {
@@ -51,13 +52,13 @@ public final class UserDAO
 
     }
 
-    public User searchUser(String username)
+    public User searchUserByName(String username)
     {
         User user = new User();
         conn = DB.dbConn.getconn();
         String sname = null;
         String sPassWord = null;
-
+        int sId = -1;
         String sql = "SELECT * FROM USER WHERE LoginID = ?";
         try
         {
@@ -66,13 +67,47 @@ public final class UserDAO
             rs = pstmt.executeQuery();
             if (rs.next())
             {
+                sId = rs.getInt(1);
                 sname = rs.getString(2);
                 sPassWord = rs.getString(3);
             }
-
+            user.setId(sId);
             user.setLoginID(sname);
             user.setPassword(sPassWord);
 
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            DB.dbClose.queryClose(pstmt, rs, conn);
+        }
+        return user;
+    }
+
+    public User searchUserById(int id)
+    {
+        User user = new User();
+        conn = DB.dbConn.getconn();
+        String sql = "SELECT * FROM USER WHERE ID = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                user.setId(rs.getInt(1));
+                user.setLoginID(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setName(rs.getString(4));
+                //user.setBirthday(rs.getDate(5));
+                user.setSex(rs.getString(6));
+                user.setComm(rs.getString(7));
+                user.setAddress(rs.getString(8));
+                user.setCommit(rs.getString(9));
+                user.setSubcommit(rs.getString(10));
+            }
         } catch (SQLException e)
         {
             e.printStackTrace();

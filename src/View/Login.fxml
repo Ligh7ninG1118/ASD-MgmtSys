@@ -22,7 +22,7 @@
             <HBox alignment="CENTER" layoutX="40.0" layoutY="10.0" prefHeight="80.0" prefWidth="250.0" spacing="30.0">
                <children>
                   <Button id="btn_SignIn" fx:id="btn_login" mnemonicParsing="false" onAction="#loginAction" prefHeight="40.0" prefWidth="90.0" text="登录" />
-                  <Button id="btn_SignUp" fx:id="btn_reg" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="注册" />
+                  <Button id="btn_SignUp" fx:id="btn_reg" mnemonicParsing="false" onAction="#regAction" prefHeight="40.0" prefWidth="90.0" text="注册" />
                </children>
             </HBox>
          </children>

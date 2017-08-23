@@ -1,7 +1,8 @@
 # 能力规范文档管理系统
 
-### REMINDER (KNOWN BUGS)
+### TO-DO LIST
 
-- EVERYTHING ABOUT COMMIT / SUBCOMMIT
-- BIRTHDAY (DATE) FORMAT
-
+- 生日格式处理问题
+- 分会/行会处理问题
+- 界面优化
+- 信息维护窗口 性别
