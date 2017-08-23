@@ -1,5 +1,6 @@
 package MgmtSys;
 
+
 import Controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception
     {
+        DB.dbConn.getconn();
         Parent root = FXMLLoader.load(getClass().getResource("/View/Register.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Register");

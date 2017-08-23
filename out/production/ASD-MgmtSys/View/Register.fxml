@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="703.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
+    <children>
+        <AnchorPane layoutX="46.0" layoutY="36.0" prefHeight="576.0" prefWidth="382.0">
+            <children>
+                <Label layoutX="30.0" layoutY="25.0" text="用户名" />
+                <Label layoutX="30.0" layoutY="75.0" text="密码" />
+                <Label layoutX="30.0" layoutY="125.0" text="确认密码" />
+                <Label layoutX="30.0" layoutY="175.0" text="姓名" />
+                <Label layoutX="30.0" layoutY="275.0" text="出生日期" />
+                <Label layoutX="30.0" layoutY="325.0" text="联系方式" />
+                <Label layoutX="30.0" layoutY="225.0" text="性别" />
+                <Label layoutX="30.0" layoutY="475.0" text="行业分会" />
+                <TextField id="usernameTextField" fx:id="usernameTextField" layoutX="120.0" layoutY="20.0" />
+                <PasswordField id="passwordTextField" fx:id="passwordTextField" layoutX="120.0" layoutY="70.0">
+               <tooltip>
+                  <Tooltip text="密码应当为大于等于6位，小于等于18位，且仅由英文字母，数字组成"  />
+               </tooltip></PasswordField>
+                <PasswordField id="repasswordTextField" fx:id="repasswordTextField" layoutX="120.0" layoutY="120.0" />
+                <TextField id="nameTextField" fx:id="nameTextField" layoutX="120.0" layoutY="170.0" />
+                <ChoiceBox id="sexCBox" fx:id="sexCBox" layoutX="120.0" layoutY="220.0" prefHeight="30.0" prefWidth="202.0">
+                    <String fx:value="男" />
+                    <String fx:value="女" />
+                    <String fx:value="其他" />
+                </ChoiceBox>
+                <DatePicker id="birthdayDatePicker" fx:id="birthdayDatePicker" layoutX="120.0" layoutY="270.0" prefHeight="30.0" prefWidth="202.0" />
+                <TextField id="commTextField" fx:id="commTextField" layoutX="120.0" layoutY="320.0" />
+                <TextField id="addressTextField" fx:id="addressTextField" layoutX="120.0" layoutY="370.0" />
+                <TextField id="recommTextField" fx:id="recommTextField" layoutX="120.0" layoutY="420.0" />
+                <ChoiceBox id="subcommitCBox" fx:id="subcommitCBox" layoutX="120.0" layoutY="470.0" prefHeight="30.0" prefWidth="202.0">
+                    <String fx:value="SAMPLE TEXT 1" />
+                    <String fx:value="SAMPLE TEXT 2" />
+                    <String fx:value="SAMPLE TEXT 3" />
+                </ChoiceBox>
+                <ChoiceBox id="commitCBox" fx:id="commitCBox" layoutX="120.0" layoutY="520.0" prefHeight="30.0" prefWidth="202.0">
+                    <String fx:value="SAMPLE TEXT 1" />
+                    <String fx:value="SAMPLE TEXT 2" />
+                    <String fx:value="SAMPLE TEXT 3" />
+                </ChoiceBox>
+                <Label layoutX="30.0" layoutY="525.0" text="专委会" />
+                <Label layoutX="30.0" layoutY="425.0" text="推荐人" />
+                <Label layoutX="30.0" layoutY="375.0" text="家庭住址" />
+                <Label id="alertMessage" fx:id="alertmessageLabel" layoutX="77.0" layoutY="565.0" prefHeight="20.0" prefWidth="229.0" textFill="#ff4646" />
+                <Label layoutX="325.0" layoutY="20.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="70.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="120.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="170.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="220.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="270.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="320.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="470.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="325.0" layoutY="520.0" text="*" textFill="#ff4646">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <HBox alignment="CENTER" layoutX="46.0" layoutY="625.0" prefHeight="52.0" prefWidth="382.0" spacing="50.0">
+            <children>
+                <Button id="regButton" fx:id="regButton" mnemonicParsing="false" onAction="#registerAction" text="注册">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+                <Button id="cancelButton" fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" text="取消">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+                <Button id="clrButton" fx:id="clrButton" mnemonicParsing="false" onAction="#clearAction" text="清空">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
