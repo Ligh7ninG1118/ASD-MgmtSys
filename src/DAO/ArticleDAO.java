@@ -22,7 +22,7 @@ public final class ArticleDAO
         try
         {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,article.getAuthor().getID());
+            pstmt.setInt(1,article.getAuthor().getId());
             pstmt.setString(2,article.getTitle());
             pstmt.setString(3,article.getContent());
             pstmt.setDate(4,article.getSubmiteDate());

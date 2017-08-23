@@ -21,7 +21,7 @@ public final class CommentDAO
         try
         {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,cmt.getAuthor().getID());
+            pstmt.setInt(1,cmt.getAuthor().getId());
             pstmt.setString(2,cmt.getContent());
             pstmt.setDate(3,cmt.getCommentDate());
             pstmt.setBoolean(4,cmt.getChoice());

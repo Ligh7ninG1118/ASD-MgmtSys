@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.User;
+import Util.*;
 
 import javax.xml.soap.Text;
 import java.sql.Time;
@@ -48,12 +49,13 @@ public class RegisterController
     private ChoiceBox commitCBox;
 
     boolean isFilled[];
-
+    UserVerif uv = new UserVerif();
+    UserDAO udao = new UserDAO();
     @FXML
     public void registerAction(ActionEvent e)
     {
         if (ifInvaildInput())
-            return;
+           return;
 
         isFilled = new boolean[2];
         if (addressTextField.getText().equals(""))
@@ -67,39 +69,52 @@ public class RegisterController
         alertmessageLabel.setText("");
         String ipusername = usernameTextField.getText().trim();
         String ippassword = passwordTextField.getText();
-        String iprepassword = repasswordTextField.getText();
 
         String ipname = nameTextField.getText().trim();
         String ipsex = sexCBox.getValue().toString();
         String ipcomm = commTextField.getText().trim();
         String ipsubcommit = subcommitCBox.getValue().toString();
         String ipcommit = commitCBox.getValue().toString();
+        String iprecommender = recommTextField.getText().trim();
+        String ipaddress = "";
+        String ipbirthday ="";
 
         if (isFilled[0])
         {
-            String ipaddress = addressTextField.getText().trim().trim();
+            ipaddress = addressTextField.getText().trim().trim();
         }
 
         if (isFilled[1])
         {
-            String ipbirthday = birthdayDatePicker.getValue().toString();
+             ipbirthday = birthdayDatePicker.getValue().toString();
         }
 
 
-        /**
-         * WIP AREA 连接数据库 获取信息 查找是否有相同的用户名
-         * WIP AREA 数据录入数据库
-         */
+        if (uv.ifUserExists(ipusername))
+        {
+            alertmessageLabel.setText("用户已存在");
+            return;
+        }
+        else
+        {
+            User user = new User();
+            user.setLoginID(ipusername);
+            user.setPassword(ippassword);
+            user.setName(ipname);
+            user.setSex(ipsex);
+            user.setType(0);
+            user.setComm(ipcomm);
+            user.setSubcommit(ipsubcommit);
+            user.setCommit(ipcommit);
+            user.setAddress(ipaddress);
+            user.setRecommender(iprecommender);
+            //user.setBirthday(ipbirthday);
 
-        User user=new User();
-        user.setLoginID(ipusername);
-        user.setPassword(ippassword);
-        user.setType(0);
 
-        UserDAO test = new UserDAO();
-        boolean bool = test.addUser(user);
-        if(bool)
-            System.out.println("Added");
+            boolean bool = udao.addUser(user);
+            if (bool)
+                alertmessageLabel.setText("注册信息提交");
+        }
     }
 
     @FXML
