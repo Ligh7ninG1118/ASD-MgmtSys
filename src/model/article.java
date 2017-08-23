@@ -19,6 +19,18 @@ public class Article
     private int articleType;
     private String commentids;
 
+    public String getAuthorname()
+    {
+        return authorname;
+    }
+
+    public void setAuthorname(String authorname)
+    {
+        this.authorname = authorname;
+    }
+
+    private String authorname;
+
     public int getId()
     {
         return id;

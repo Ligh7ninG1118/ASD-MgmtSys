@@ -78,7 +78,7 @@ public class RegisterController implements ControlledStage
         String ipcommit = commitCBox.getValue().toString();
         String iprecommender = recommTextField.getText().trim();
         String ipaddress = "";
-        String ipbirthday ="";
+        LocalDate ipbirthday =null;
 
         if (isFilled[0])
         {
@@ -87,7 +87,7 @@ public class RegisterController implements ControlledStage
 
         if (isFilled[1])
         {
-             ipbirthday = birthdayDatePicker.getValue().toString();
+             ipbirthday = birthdayDatePicker.getValue();
         }
 
 
@@ -109,7 +109,7 @@ public class RegisterController implements ControlledStage
             user.setCommit(ipcommit);
             user.setAddress(ipaddress);
             user.setRecommender(iprecommender);
-            //user.setBirthday(ipbirthday);
+           // user.setBirthday(ipbirthday);
 
 
             boolean bool = udao.addUser(user);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -18,41 +19,40 @@
     <children>
         <HBox alignment="CENTER_RIGHT" layoutX="443.0" layoutY="14.0" prefHeight="44.0" prefWidth="341.0" spacing="20.0">
             <children>
-                <Label id="nametag" fx:id="nametag" prefHeight="20.0" prefWidth="105.0" text="欢迎 "/>
-                <Button id="btn_signoff" fx:id="btn_signoff" mnemonicParsing="false" text="注销" />
+                <Label id="nametag" fx:id="nametag" prefHeight="20.0" prefWidth="105.0" text="欢迎 " />
+                <Button id="btn_signoff" fx:id="btn_signoff" mnemonicParsing="false" onAction="#signoffAction" text="注销" />
             </children>
         </HBox>
         <AnchorPane layoutX="38.0" layoutY="60.0" prefHeight="518.0" prefWidth="727.0">
             <children>
-                <TabPane layoutX="20.0" layoutY="14.0" prefHeight="498.0" prefWidth="688.0"
-                         tabClosingPolicy="UNAVAILABLE">
+                <TabPane layoutX="20.0" layoutY="14.0" prefHeight="498.0" prefWidth="688.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab id="searchTab" fx:id="searchTab" text="查询">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <HBox alignment="CENTER" layoutX="76.0" layoutY="14.0" prefHeight="56.0"
-                                              prefWidth="537.0" spacing="5.0">
+                                        <HBox alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="56.0" prefWidth="672.0" spacing="5.0">
                                             <children>
-                                                <ChoiceBox id="searchTypeCBox" fx:id="searchTypeCBox" prefHeight="30.0"
-                                                           prefWidth="98.0"/>
-                                                <TextField id="searchTextField" fx:id="searchTextField"
-                                                           prefHeight="30.0" prefWidth="334.0"/>
-                                                <Button id="btn_search" fx:id="btn_search" mnemonicParsing="false"
-                                                        text="Button"/>
+                                                <ChoiceBox id="searchTypeCBox" fx:id="searchTypeCBox" prefHeight="30.0" prefWidth="98.0">
+                                                    <String fx:value="任意" />
+                                                    <String fx:value="作者" />
+                                                    <String fx:value="标题" />
+                                                    <String fx:value="编号" />
+                                                </ChoiceBox>
+                                                <TextField id="searchTextField" fx:id="searchTextField" prefHeight="30.0" prefWidth="334.0" />
+                                                <Button id="btn_search" fx:id="btn_search" mnemonicParsing="false" onAction="#searchAction" text="搜索" />
+                                    <Button id="btn_clearRecord" fx:id="btn_clearRecord"  mnemonicParsing="false" onAction="#clearRecordAction" prefHeight="30.0" prefWidth="89.0" text="清空记录" />
                                             </children>
                                         </HBox>
-                                        <TableView id="searchResult" fx:id="searchResult" layoutX="6.0" layoutY="70.0"
-                                                   prefHeight="379.0" prefWidth="677.0">
+                                        <TableView id="searchResult" fx:id="searchResult" layoutX="6.0" layoutY="70.0" prefHeight="379.0" prefWidth="677.0">
                                             <columns>
-                                                <TableColumn prefWidth="75.0" text="编号"/>
-                                                <TableColumn prefWidth="163.0" text="提案名称"/>
-                                                <TableColumn minWidth="0.0" prefWidth="108.0" text="作者"/>
-                                                <TableColumn prefWidth="88.0" text="截止日期"/>
-                                                <TableColumn prefWidth="84.0" text="状态"/>
-                                                <TableColumn minWidth="0.0" prefWidth="69.0" text="附议数"/>
-                                                <TableColumn minWidth="-Infinity" prefWidth="75.0" resizable="false"
-                                                             text="反对数"/>
+                                                <TableColumn fx:id="colId" prefWidth="75.0" text="编号" />
+                                                <TableColumn fx:id="colTitle" prefWidth="163.0" text="提案名称" />
+                                                <TableColumn fx:id="colAuthor" minWidth="0.0" prefWidth="108.0" text="作者" />
+                                                <TableColumn fx:id="colDeadlineDate" prefWidth="88.0" text="截止日期" />
+                                                <TableColumn fx:id="colStatus" prefWidth="84.0" text="状态" />
+                                                <TableColumn fx:id="colYay" minWidth="0.0" prefWidth="69.0" text="附议数" />
+                                                <TableColumn fx:id="colNay" minWidth="-Infinity" prefWidth="75.0" resizable="false" text="反对数" />
                                             </columns>
                                         </TableView>
                                     </children>
@@ -63,74 +63,58 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <TextField id="articleTitleTextField" fx:id="articleTitleTextField"
-                                                   layoutX="130.0" layoutY="40.0"/>
-                                        <TextArea id="articleContentTextArea" fx:id="articleContentTextArea"
-                                                  layoutX="130.0" layoutY="100.0" prefHeight="259.0" prefWidth="480.0"/>
-                                        <Label layoutX="40.0" layoutY="45.0" text="提案名称"/>
-                                        <Label layoutX="40.0" layoutY="105.0" text="提案内容"/>
-                                        <RadioButton id="rbtn_eula" fx:id="rbtn_eula" layoutX="130.0" layoutY="400.0"
-                                                     mnemonicParsing="false" text="我已阅读提案建议要求"/>
-                                        <HBox alignment="CENTER" layoutX="370.0" layoutY="388.0" prefHeight="44.0"
-                                              prefWidth="235.0" spacing="30.0">
+                                        <TextField id="articleTitleTextField" fx:id="articleTitleTextField" layoutX="130.0" layoutY="40.0" />
+                                        <TextArea id="articleContentTextArea" fx:id="articleContentTextArea" layoutX="130.0" layoutY="100.0" prefHeight="259.0" prefWidth="480.0" />
+                                        <Label layoutX="40.0" layoutY="45.0" text="提案名称" />
+                                        <Label layoutX="40.0" layoutY="105.0" text="提案内容" />
+                                        <RadioButton id="rbtn_eula" fx:id="rbtn_eula" layoutX="130.0" layoutY="400.0" mnemonicParsing="false" text="我已阅读提案建议要求" />
+                                        <HBox alignment="CENTER" layoutX="370.0" layoutY="388.0" prefHeight="44.0" prefWidth="235.0" spacing="30.0">
                                             <children>
-                                                <Button id="btn_print" fx:id="btn_print"
-                                                        mnemonicParsing="false" text="打印"/>
-                                                <Button id="btn_save" fx:id="btn_save"
-                                                        mnemonicParsing="false" text="保存"/>
-                                                <Button id="btn_submit" fx:id="btn_submit"
-                                                        mnemonicParsing="false" text="提交"/>
+                                                <Button id="btn_print" fx:id="btn_print" mnemonicParsing="false" text="打印" onAction="#printAction"  />
+                                                <Button id="btn_save" fx:id="btn_save" mnemonicParsing="false" text="保存"  onAction="#saveAction" />
+                                                <Button id="btn_submit" fx:id="btn_submit" mnemonicParsing="false" text="提交" onAction="#submitAction" />
                                             </children>
                                         </HBox>
                                     </children>
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab id="infoEditTab" text="信息维护">
+                        <Tab id="infoEditTab" onSelectionChanged="#editInfoTabAction" text="信息维护">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Label layoutX="20.0" layoutY="35.0" text="旧密码"/>
-                                        <Label layoutX="20.0" layoutY="75.0" text="新密码"/>
-                                        <Label layoutX="20.0" layoutY="115.0" text="密码确认"/>
-                                        <Label layoutX="20.0" layoutY="205.0" text="姓名"/>
-                                        <Label layoutX="20.0" layoutY="245.0" text="生日"/>
-                                        <Label layoutX="20.0" layoutY="285.0" text="性别"/>
-                                        <Label layoutX="20.0" layoutY="325.0" text="联系方式"/>
-                                        <Label layoutX="380.0" layoutY="205.0" text="地址"/>
-                                        <Label layoutX="380.0" layoutY="245.0" text="专业分会"/>
-                                        <Label layoutX="380.0" layoutY="285.0" text="专委会"/>
-                                        <TextField id="oldpwTextField" fx:id="oldpwTextField" layoutX="100.0"
-                                                   layoutY="30.0" prefHeight="30.0" prefWidth="200.0"/>
-                                        <TextField id="newpwTextField" fx:id="newpwTextField" layoutX="100.0"
-                                                   layoutY="70.0"/>
-                                        <TextField id="repwTextField" fx:id="repwTextField" layoutX="100.0"
-                                                   layoutY="110.0"/>
-                                        <TextField id="nameTextField" fx:id="nameTextField" layoutX="100.0"
-                                                   layoutY="200.0"/>
-                                        <DatePicker id="birthdayDatePicker" fx:id="birthdayDatePicker" layoutX="100.0"
-                                                    layoutY="240.0" prefHeight="30.0" prefWidth="209.0"/>
-                                        <TextField id="sexTextField" fx:id="sexTextField" layoutX="100.0"
-                                                   layoutY="280.0"/>
-                                        <TextField id="commTextField" fx:id="commTextField" layoutX="100.0"
-                                                   layoutY="320.0"/>
-                                        <TextField id="addressTextField" fx:id="addressTextField" layoutX="460.0"
-                                                   layoutY="200.0"/>
-                                        <ChoiceBox id="subcommitCBox" fx:id="subcommitCBox" layoutX="460.0"
-                                                   layoutY="240.0" prefHeight="30.0" prefWidth="202.0"/>
-                                        <ChoiceBox id="commitCBox" fx:id="commitCBox" layoutX="460.0" layoutY="280.0"
-                                                   prefHeight="30.0" prefWidth="203.0"/>
-                                        <HBox alignment="CENTER" layoutX="451.0" layoutY="363.0" prefHeight="82.0"
-                                              prefWidth="221.0" spacing="40.0">
+                                        <Label layoutX="20.0" layoutY="35.0" text="旧密码" />
+                                        <Label layoutX="20.0" layoutY="75.0" text="新密码" />
+                                        <Label layoutX="20.0" layoutY="115.0" text="密码确认" />
+                                        <Label layoutX="20.0" layoutY="205.0" text="姓名" />
+                                        <Label layoutX="20.0" layoutY="245.0" text="生日" />
+                                        <Label layoutX="20.0" layoutY="285.0" text="性别" />
+                                        <Label layoutX="20.0" layoutY="325.0" text="联系方式" />
+                                        <Label layoutX="380.0" layoutY="205.0" text="地址" />
+                                        <Label layoutX="380.0" layoutY="245.0" text="专业分会" />
+                                        <Label layoutX="380.0" layoutY="285.0" text="专委会" />
+                                        <TextField id="oldpwTextField" fx:id="oldpwTextField" layoutX="100.0" layoutY="30.0" prefHeight="30.0" prefWidth="200.0" />
+                                        <TextField id="newpwTextField" fx:id="newpwTextField" layoutX="100.0" layoutY="70.0" />
+                                        <TextField id="repwTextField" fx:id="repwTextField" layoutX="100.0" layoutY="110.0" />
+                                        <TextField id="nameTextField" fx:id="nameTextField" layoutX="100.0" layoutY="200.0" />
+                                        <DatePicker id="birthdayDatePicker" fx:id="birthdayDatePicker" layoutX="100.0" layoutY="240.0" prefHeight="30.0" prefWidth="209.0" />
+                                        <ChoiceBox id="sexCBox" fx:id="sexCBox" layoutX="100.0" layoutY="280.0">
+                                            <String fx:value="男" />
+                                            <String fx:value="女" />
+                                            <String fx:value="其他" />
+                                        </ChoiceBox>
+                                        <TextField id="commTextField" fx:id="commTextField" layoutX="100.0" layoutY="320.0" />
+                                        <TextField id="addressTextField" fx:id="addressTextField" layoutX="460.0" layoutY="200.0" />
+                                        <ChoiceBox id="subcommitCBox" fx:id="subcommitCBox" layoutX="460.0" layoutY="240.0" prefHeight="30.0" prefWidth="202.0" />
+                                        <ChoiceBox id="commitCBox" fx:id="commitCBox" layoutX="460.0" layoutY="280.0" prefHeight="30.0" prefWidth="203.0" />
+                                        <HBox alignment="CENTER" layoutX="451.0" layoutY="363.0" prefHeight="82.0" prefWidth="221.0" spacing="40.0">
                                             <children>
-                                                <Button id="btn_edit" fx:id="btn_edit" mnemonicParsing="false"
-                                                        text="提交修改"/>
-                                                <Button id="btn_reset" fx:id="btn_reset" mnemonicParsing="false"
-                                                        text="恢复全部"/>
+                                                <Button id="btn_edit" fx:id="btn_edit" mnemonicParsing="false" onAction="#editAction" text="提交修改" />
+                                                <Button id="btn_reset" fx:id="btn_reset" mnemonicParsing="false" onAction="#resetAction" text="恢复全部" />
                                             </children>
                                         </HBox>
-                                        <Label id="alertmessage" fx:id="alertmessage" layoutX="100.0" layoutY="394.0"/>
-                                        <Label layoutX="258.0" layoutY="165.0" text="注意：关于专业分会及专委会的修改需经过管理员审核后生效"/>
+                                        <Label id="alertmessage" fx:id="alertmessage" layoutX="100.0" layoutY="394.0" />
+                                        <Label layoutX="258.0" layoutY="165.0" text="注意：关于专业分会及专委会的修改需经过管理员审核后生效" />
                                     </children>
                                 </AnchorPane>
                             </content>

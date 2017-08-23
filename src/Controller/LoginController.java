@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.UserDAO;
 import MgmtSys.Main;
 import Util.Logger;
 import Util.UserVerif;
@@ -31,6 +32,7 @@ public class LoginController implements ControlledStage
     @FXML
     public void loginAction(ActionEvent e)
     {
+        UserDAO udao = new UserDAO();
         String loginID = userField.getText().trim();
         String password = pwField.getText().trim();
         if (loginID.equals("") || password.equals(""))
@@ -44,10 +46,23 @@ public class LoginController implements ControlledStage
             return;
         } else
         {
-            myLogger.addUserInfo(uvf.getUserId(loginID));
-            myController.loadStage(WriterViewID, WriterViewRes);
-            myController.setStage(WriterViewID, Main.loginViewID);
+            if (udao.searchUserByName(loginID).getType() == 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("登录失败");
+                alert.setHeaderText(null);
+                alert.setContentText("账户申请尚未通过");
+                alert.showAndWait();
+                return;
+            } else
+            {
+                userField.setText("");
+                pwField.setText("");
 
+                //myLogger.addUserInfo(uvf.getUserId(loginID));
+                myController.loadStage(WriterViewID, WriterViewRes);
+                myController.setStage(WriterViewID, Main.loginViewID);
+            }
         }
     }
 

@@ -47,9 +47,19 @@ public final class UserDAO
         return flag;
     }
 
-    public static void updateUser(User user)
+    public void updateUser(User user)
     {
-
+        conn = DB.dbConn.getconn();
+        String sql = "UPDATE User set Sex = '"+user.getSex()+"' WHERE ID = "+user.getId()+"";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally
+        {
+            DB.dbClose.queryClose(pstmt, rs, conn);
+        }
     }
 
     public User searchUserByName(String username)
@@ -59,6 +69,7 @@ public final class UserDAO
         String sname = null;
         String sPassWord = null;
         int sId = -1;
+        int sType=-1;
         String sql = "SELECT * FROM USER WHERE LoginID = ?";
         try
         {
@@ -70,11 +81,12 @@ public final class UserDAO
                 sId = rs.getInt(1);
                 sname = rs.getString(2);
                 sPassWord = rs.getString(3);
+                sType =rs.getInt(5);
             }
             user.setId(sId);
             user.setLoginID(sname);
             user.setPassword(sPassWord);
-
+            user.setType(sType);
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -101,12 +113,12 @@ public final class UserDAO
                 user.setLoginID(rs.getString(2));
                 user.setPassword(rs.getString(3));
                 user.setName(rs.getString(4));
-                //user.setBirthday(rs.getDate(5));
-                user.setSex(rs.getString(6));
-                user.setComm(rs.getString(7));
-                user.setAddress(rs.getString(8));
-                user.setCommit(rs.getString(9));
-                user.setSubcommit(rs.getString(10));
+                user.setBirthday(rs.getDate(6));
+                user.setSex(rs.getString(7));
+                user.setComm(rs.getString(8));
+                user.setAddress(rs.getString(9));
+                user.setCommit(rs.getString(10));
+                user.setSubcommit(rs.getString(11));
             }
         } catch (SQLException e)
         {
