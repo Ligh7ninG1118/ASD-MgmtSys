@@ -26,8 +26,8 @@ public class Main extends Application {
     public static String WriterViewID = "WriterView";
     public static String WriterViewRes = "/View/Writer.fxml";
 
-    public static String ArticleDetailViewID = "RegisterView";
-    public static String ArticleDetailViewRes = "/View/Register.fxml";
+    public static String ArticleDetailViewID = "ArticleDetail";
+    public static String ArticleDetailViewRes = "/View/ArticleDetail.fxml";
 
     private StageController stageController;
 

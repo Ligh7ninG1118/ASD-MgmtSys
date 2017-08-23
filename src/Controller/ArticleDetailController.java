@@ -1,13 +1,15 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class ArticleDetailController
+public class ArticleDetailController  implements ControlledStage
 {
+    StageController myController;
     @FXML
     private RadioButton rbtn_Nay;
     @FXML
@@ -34,5 +36,10 @@ public class ArticleDetailController
     public void initialize()
     {
 
+    }
+
+    public void setStageController(StageController stageController)
+    {
+        this.myController = stageController;
     }
 }

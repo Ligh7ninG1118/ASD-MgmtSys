@@ -43,7 +43,7 @@
                   <TableColumn id="commentDateTableCol" prefWidth="118.0" text="时间" />
               </columns>
             </TableView>
-            <Button id="btn_Cancel"  fx:id = "btn_Cancel" onAction="#cancelAction"  layoutX="543.0" layoutY="190.0" mnemonicParsing="false" text="返回" />
+            <Button id="btn_Cancel"  fx:id = "btn_Cancel"  layoutX="543.0" layoutY="190.0" mnemonicParsing="false" text="返回" />
          </children>
       </AnchorPane>
    </children>

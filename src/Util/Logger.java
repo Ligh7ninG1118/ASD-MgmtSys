@@ -58,4 +58,47 @@ public class Logger
         }
         return udao.searchUserById(id);
     }
+
+    public void addArticleInfo(int articleId)
+    {
+        conn = DB.dbConn.getconn();
+        String sql = "INSERT INTO LOG(ArticleID) VALUES(?)";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, articleId);
+            pstmt.executeUpdate();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            dbClose.addClose(pstmt, conn);
+        }
+
+    }
+
+    public User requireArticleInfo()
+    {
+        int id=-1;
+        conn = DB.dbConn.getconn();
+        String sql = "SELECT * FROM LOG";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                id = rs.getInt(3);
+            }
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            DB.dbClose.queryClose(pstmt, rs, conn);
+        }
+        return udao.searchUserById(id);
+    }
 }

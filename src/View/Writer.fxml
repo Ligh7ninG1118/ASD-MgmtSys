@@ -41,10 +41,10 @@
                                                 </ChoiceBox>
                                                 <TextField id="searchTextField" fx:id="searchTextField" prefHeight="30.0" prefWidth="334.0" />
                                                 <Button id="btn_search" fx:id="btn_search" mnemonicParsing="false" onAction="#searchAction" text="搜索" />
-                                    <Button id="btn_clearRecord" fx:id="btn_clearRecord"  mnemonicParsing="false" onAction="#clearRecordAction" prefHeight="30.0" prefWidth="89.0" text="清空记录" />
+                                    <Button id="btn_clearRecord" fx:id="btn_clearRecord" mnemonicParsing="false" onAction="#clearRecordAction" prefHeight="30.0" prefWidth="89.0" text="清空记录" />
                                             </children>
                                         </HBox>
-                                        <TableView id="searchResult" fx:id="searchResult" layoutX="6.0" layoutY="70.0" prefHeight="379.0" prefWidth="677.0">
+                                        <TableView id="searchResult" fx:id="searchResult" layoutX="6.0" layoutY="70.0" onMouseReleased="#articalDetailAction" prefHeight="379.0" prefWidth="677.0">
                                             <columns>
                                                 <TableColumn fx:id="colId" prefWidth="75.0" text="编号" />
                                                 <TableColumn fx:id="colTitle" prefWidth="163.0" text="提案名称" />
@@ -70,9 +70,9 @@
                                         <RadioButton id="rbtn_eula" fx:id="rbtn_eula" layoutX="130.0" layoutY="400.0" mnemonicParsing="false" text="我已阅读提案建议要求" />
                                         <HBox alignment="CENTER" layoutX="370.0" layoutY="388.0" prefHeight="44.0" prefWidth="235.0" spacing="30.0">
                                             <children>
-                                                <Button id="btn_print" fx:id="btn_print" mnemonicParsing="false" text="打印" onAction="#printAction"  />
-                                                <Button id="btn_save" fx:id="btn_save" mnemonicParsing="false" text="保存"  onAction="#saveAction" />
-                                                <Button id="btn_submit" fx:id="btn_submit" mnemonicParsing="false" text="提交" onAction="#submitAction" />
+                                                <Button id="btn_print" fx:id="btn_print" mnemonicParsing="false" onAction="#printAction" text="打印" />
+                                                <Button id="btn_save" fx:id="btn_save" mnemonicParsing="false" onAction="#saveAction" text="保存" />
+                                                <Button id="btn_submit" fx:id="btn_submit" mnemonicParsing="false" onAction="#submitAction" text="提交" />
                                             </children>
                                         </HBox>
                                     </children>

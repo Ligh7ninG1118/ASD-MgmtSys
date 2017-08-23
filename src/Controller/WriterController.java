@@ -4,12 +4,16 @@ import DAO.ArticleDAO;
 import DAO.UserDAO;
 import MgmtSys.Main;
 import Util.Logger;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.*;
+import javafx.util.Callback;
 import model.Article;
 import model.User;
 
@@ -21,10 +25,13 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
+import static MgmtSys.Main.ArticleDetailViewID;
 import static MgmtSys.Main.WriterViewID;
+import static MgmtSys.Main.WriterViewRes;
 
 public class WriterController implements ControlledStage, Initializable
 {
+    public static DataFormat dataFormat = new DataFormat("mydata");
     StageController myController;
     Logger myLogger = new Logger();
     User user = null;
@@ -80,7 +87,7 @@ public class WriterController implements ControlledStage, Initializable
     @FXML
     private TableColumn colNay;
     @FXML
-    private TableView searchResult;
+    private TableView<Article> searchResult=new TableView<>();
 
     @FXML
     private Label nametag;
@@ -149,7 +156,7 @@ public class WriterController implements ControlledStage, Initializable
         myController.setStage(Main.loginViewID, WriterViewID);
     }
 
-    public void searchAction(Event event)
+    public void searchAction(Event e)
     {
         ObservableList<Article> list = FXCollections.observableArrayList();
         String key = searchTextField.getText();
@@ -160,8 +167,9 @@ public class WriterController implements ControlledStage, Initializable
             list.add(temp);
         }
         searchResult.setItems(list);
-
     }
+
+
 
     public void submitAction(Event event)
     {
@@ -226,5 +234,11 @@ public class WriterController implements ControlledStage, Initializable
     public void clearRecordAction(ActionEvent actionEvent)
     {
         searchTextField.clear();
+    }
+
+    public void articalDetailAction(MouseEvent mouseEvent)
+    {
+        myController.loadStage(ArticleDetailViewID, Main.ArticleDetailViewRes);
+        myController.setStage(ArticleDetailViewID, WriterViewID);
     }
 }
