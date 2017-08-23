@@ -13,13 +13,29 @@ import java.util.Date;
 
 public class UserVerif
 {
+    UserDAO test = new UserDAO();
+
     public boolean ifUserExists(String username)
     {
-        UserDAO test = new UserDAO();
         User tu = test.searchUser(username);
-        if(tu.getLoginID()!=null)
+        if (tu.getLoginID() != null)
             return true;
         else
             return false;
+    }
+
+    public boolean AuthInfoVerif(String un, String pw)
+    {
+        User tu = test.searchUser(un);
+
+        if (tu.getLoginID() == null)
+        {
+            return false;
+        }
+        if (!tu.getPassword().equals(pw))
+        {
+            return false;
+        }
+        return true;
     }
 }

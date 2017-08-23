@@ -1,5 +1,6 @@
 package Controller;
 
+import Util.UserVerif;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,8 @@ import java.util.logging.Logger;
 
 public class LoginController
 {
+    UserVerif uvf = new UserVerif();
+
 
     @FXML
     private Button btn_login;
@@ -21,9 +24,7 @@ public class LoginController
     @FXML
     private TextField pwField;
     @FXML
-    private RadioButton rbtn_isWriter;
-    @FXML
-    private RadioButton rbtn_isAdmin;
+    private Label alertmessage;
 
     @FXML
     public void loginAction(ActionEvent e)
@@ -32,9 +33,16 @@ public class LoginController
         String password = pwField.getText().trim();
         if(loginID.equals("")||password.equals(""))
         {
-            //messagelabel输出反馈信息
+            alertmessage.setText("Empty");
             return;
         }
+        if(!uvf.AuthInfoVerif(loginID,password))
+        {
+            alertmessage.setText("Error");
+            return;
+        }
+        else
+            alertmessage.setText("Success");
     }
 
     public void regAction(ActionEvent e)
