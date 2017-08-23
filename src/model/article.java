@@ -1,10 +1,13 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Article
 {
     private static final long serialVersionUID = 1;
+
+
+    private int id;
     private User author;
     private String title;
     private String content;
@@ -14,7 +17,17 @@ public class Article
     private int yay;
     private int nay;
     private int articleType;
-    private Comment cmt[];
+    private String commentids;
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
     public User getAuthor()
     {
@@ -106,13 +119,17 @@ public class Article
         this.articleType = articleType;
     }
 
-    public Comment[] getCmt()
+    public String getCommentids()
     {
-        return cmt;
+        return commentids;
     }
 
-    public void setCmt(Comment[] cmt)
+    public void setCommentids(String commentids)
     {
-        this.cmt = cmt;
+        this.commentids = commentids;
     }
+
+
+
+
 }

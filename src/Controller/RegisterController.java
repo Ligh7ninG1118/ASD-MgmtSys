@@ -1,8 +1,10 @@
 package Controller;
 
+import DAO.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.User;
 
 import javax.xml.soap.Text;
 import java.sql.Time;
@@ -88,6 +90,16 @@ public class RegisterController
          * WIP AREA 连接数据库 获取信息 查找是否有相同的用户名
          * WIP AREA 数据录入数据库
          */
+
+        User user=new User();
+        user.setLoginID(ipusername);
+        user.setPassword(ippassword);
+        user.setType(0);
+
+        UserDAO test = new UserDAO();
+        boolean bool = test.addUser(user);
+        if(bool)
+            System.out.println("Added");
     }
 
     @FXML

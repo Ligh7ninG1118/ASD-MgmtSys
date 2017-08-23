@@ -1,29 +1,31 @@
 package DAO;
 
-import model.User;
-import DB.*;
+import model.Comment;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public final class UserDAO
+public final class CommentDAO
 {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
 
-    public boolean addUser(User user)
+    public boolean addComment(Comment cmt)
     {
         boolean flag= false;
         conn = DB.dbConn.getconn();
-        String sql = "INSERT INTO USER(LoginID,Password,AccountType) VALUES(?,?,?)";
+        String sql = "INSERT INTO COMMENT(AuthorID,Content,CommentDate,Choice,ArticleID) VALUES(?,?,?,?,?)";
         try
         {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,user.getLoginID());
-            pstmt.setString(2,user.getPassword());
-            pstmt.setInt(3,user.getType());
+            pstmt.setInt(1,cmt.getAuthor().getID());
+            pstmt.setString(2,cmt.getContent());
+            pstmt.setDate(3,cmt.getCommentDate());
+            pstmt.setBoolean(4,cmt.getChoice());
+            pstmt.setInt(5,cmt.getArticle().getId());
 
             int rs = pstmt.executeUpdate();
             if (rs > 0)
@@ -35,18 +37,9 @@ public final class UserDAO
             e.printStackTrace();
         }finally
         {
-            dbClose.addClose(pstmt,conn);
+            DB.dbClose.addClose(pstmt,conn);
         }
         return flag;
     }
 
-    public static void updateUser(User user)
-    {
-
-    }
-
-    public static void searchUser(User user)
-    {
-
-    }
 }

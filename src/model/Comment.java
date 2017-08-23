@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Comment implements Serializable
 {
@@ -13,18 +13,65 @@ public class Comment implements Serializable
     private Date commentdate;
     private boolean choice;
 
-    public int getID(){return id;}
-    public void setID(int id){this.id = id;}
+    public Article getArticle()
+    {
+        return article;
+    }
 
-    public User getAuthor(){return author;}
-    public void setAuthor(User author){this.author = author;}
+    public void setArticle(Article article)
+    {
+        this.article = article;
+    }
 
-    public String getContent(){return content;}
-    public void setContent(String content){this.content = content;}
+    private Article article;
 
-    public Date getCommentDate(){return commentdate;}
-    public void setCommentDate(Date commentdate){this.commentdate = commentdate;}
+    public int getID()
+    {
+        return id;
+    }
 
-    public boolean getChoice(){return choice;}
-    public void setChoice(boolean choice){this.choice = choice;}
+    public void setID(int id)
+    {
+        this.id = id;
+    }
+
+    public User getAuthor()
+    {
+        return author;
+    }
+
+    public void setAuthor(User author)
+    {
+        this.author = author;
+    }
+
+    public String getContent()
+    {
+        return content;
+    }
+
+    public void setContent(String content)
+    {
+        this.content = content;
+    }
+
+    public Date getCommentDate()
+    {
+        return commentdate;
+    }
+
+    public void setCommentDate(Date commentdate)
+    {
+        this.commentdate = commentdate;
+    }
+
+    public boolean getChoice()
+    {
+        return choice;
+    }
+
+    public void setChoice(boolean choice)
+    {
+        this.choice = choice;
+    }
 }
